@@ -124,7 +124,7 @@
       var $row = $(input).closest('tr');
       var $newRow = $row.clone();
       $row.before($newRow);
-
+      jumpUp(input);
       return false;
     }
 
@@ -133,6 +133,7 @@
       var $row = $(input).closest('tr');
       var $newRow = $row.clone();
       $row.after($newRow);
+      jumpDown(input);
       return false;
     }
 
@@ -142,6 +143,7 @@
       var $newRow = $row.clone();
       $newRow.find(':input').val('');
       $row.before($newRow);
+      jumpUp(input);
       return false;
     }
 
@@ -151,6 +153,7 @@
       var $newRow = $row.clone();
       $newRow.find(':input').val('');
       $row.after($newRow);
+      jumpDown(input);
       return false;
     }
 
