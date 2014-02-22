@@ -165,7 +165,9 @@
     //
     function remove (input) {
       var $row = $(input).closest('tr');
-      if ($row.next().length) {
+      var $next = $row.next();
+      // if there is a next row, and it's not the last one ...
+      if ($next.length && ! $next.is(':last-child')) {
         jumpDown(input);
       } else {
         jumpUp(input);
