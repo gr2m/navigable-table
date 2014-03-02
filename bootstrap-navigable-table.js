@@ -216,6 +216,11 @@
   // =======================
 
   $(document).on('keydown.bs.navigableTable.data-api click.bs.navigableTable.data-api focus.bs.navigableTable.data-api', 'table[data-navigable-spy]', function(event) {
-    $(event.currentTarget).navigableTable().removeAttr('data-navigable-spy');
+    var $table = $(event.currentTarget);
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    $table.removeAttr('data-navigable-spy');
+    $table.navigableTable();
+    $table.trigger(event);
   });
 })(jQuery);
