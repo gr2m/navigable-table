@@ -36,9 +36,8 @@
       var input = event.target;
       var shiftKeyPressed = event.shiftKey;
       var keyCode = event.keyCode;
-      if (!event[keyboardShortcutsMetakey]) {
-        return;
-      }
+
+      if (!event[keyboardShortcutsMetakey]) return;
 
       return navigate(input, keyCode, shiftKeyPressed);
     }
@@ -50,13 +49,13 @@
     function navigate (input, keyCode, shiftKeyPressed) {
       switch (keyCode) {
         case 37: // left
-          return jumpLeft(input);
+          return jump('left', input);
         case 39: // right
-          return jumpRight(input);
+          return jump('right',input);
         case 38: // up
-          return shiftKeyPressed ? moveUp(input) : jumpUp(input);
+          return shiftKeyPressed ? moveUp(input) : jump('up',input);
         case 40: // down
-          return shiftKeyPressed ? moveDown(input) : jumpDown(input);
+          return shiftKeyPressed ? moveDown(input) : jump('down',input);
         case 68: // d (duplicate)
           return shiftKeyPressed ? duplicateUp(input) : duplicateDown(input);
         case 13: // enter (insert)
@@ -67,47 +66,8 @@
     }
 
     //
-    function jumpLeft (input) {
-      var $cell = $(input).closest('td');
-      var $input = $cell.prev().find(focusableSelector);
-
-      if (! $input.length) return;
-
-      $input.focus().select();
-      return false;
-    }
-
-    //
-    function jumpRight (input) {
-      var $cell = $(input).closest('td');
-      var $input = $cell.next().find(focusableSelector);
-
-      if (! $input.length) return;
-
-      $input.focus().select();
-      return false;
-    }
-
-    //
-    function jumpUp (input) {
-      var $cell = $(input).closest('td');
-      var $row = $cell.parent();
-      var index = $cell.index();
-      var $input = $row.prev().children('td,th').eq(index).find(focusableSelector);
-
-      if (! $input.length) return;
-
-      $input.focus().select();
-      return false;
-    }
-
-    //
-    function jumpDown (input) {
-      var $cell = $(input).closest('td');
-      var $row = $cell.parent();
-      var index = $cell.index();
-      var $input = $row.next().children('td,th').eq(index).find(focusableSelector);
-
+    function jump(direction, input) {
+      var $input = getJumpTargetInput(direction, input);
       if (! $input.length) return;
 
       $input.focus().select();
@@ -119,9 +79,7 @@
       var $row = $(input).closest('tr');
       var $prev = $row.prev();
 
-      if ($prev.length === 0) {
-        return false;
-      }
+      if ($prev.length === 0) return false;
 
       $prev.insertAfter($row);
       return false;
@@ -132,9 +90,7 @@
       var $row = $(input).closest('tr');
       var $next = $row.next();
 
-      if ($next.length === 0) {
-        return false;
-      }
+      if ($next.length === 0) return false;
 
       $next.insertBefore($row);
       return false;
@@ -146,7 +102,7 @@
       var $newRow = $row.clone();
       passSelecectValues($row, $newRow);
       $row.before($newRow);
-      jumpUp(input);
+      jump('up', input);
       return false;
     }
 
@@ -156,7 +112,7 @@
       var $newRow = $row.clone();
       passSelecectValues($row, $newRow);
       $row.after($newRow);
-      jumpDown(input);
+      jump('down', input);
       return false;
     }
 
@@ -166,7 +122,7 @@
       var $newRow = $row.clone();
       $newRow.find(focusableSelector).val('');
       $row.before($newRow);
-      jumpUp(input);
+      jump('up', input);
       return false;
     }
 
@@ -176,7 +132,7 @@
       var $newRow = $row.clone();
       $newRow.find(focusableSelector).val('');
       $row.after($newRow);
-      jumpDown(input);
+      jump('down', input);
       return false;
     }
 
@@ -186,12 +142,40 @@
       var $next = $row.next();
       // if there is a next row, and it's not the last one ...
       if ($next.length && ! $next.is(':last-child')) {
-        jumpDown(input);
+        jump('down', input);
       } else {
-        jumpUp(input);
+        jump('up', input);
       }
       $row.remove();
       return false;
+    }
+
+    //
+    //
+    //
+    function getJumpTargetInput (direction, input) {
+      if (direction === 'up' || direction === 'down') {
+        return getJumpTargetRowInput(direction, input);
+      }
+
+      return getJumpTargetColumnInput(direction, input);
+    }
+
+    //
+    function getJumpTargetRowInput (direction, input) {
+      var $cell = $(input).closest('td');
+      var $row = $cell.parent();
+      var $targetRow = (direction === 'up') ? $row.prev() : $row.next();
+
+      return $targetRow.children('td,th').eq( $cell.index() ).find(focusableSelector);
+    }
+
+    //
+    function getJumpTargetColumnInput (direction, input) {
+      var $cell = $(input).closest('td');
+      var $targetCell = (direction === 'left') ? $cell.prev() : $cell.next();
+
+      return $targetCell.find(focusableSelector);
     }
 
     //
