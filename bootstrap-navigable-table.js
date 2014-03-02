@@ -9,6 +9,7 @@
     var $table, $body;
     var keyboardShortcutsMetakey;
     var focusableSelector = '[name],a';
+    var currentEvent;
 
     //
     //
@@ -39,6 +40,10 @@
 
       if (!event[keyboardShortcutsMetakey]) return;
 
+      // store current event to pass it to bump events.
+      // That way the bump handlers can cancel it if needed.
+      currentEvent = event;
+
       return navigate(input, keyCode, shiftKeyPressed);
     }
 
@@ -51,11 +56,11 @@
         case 37: // left
           return jump('left', input);
         case 39: // right
-          return jump('right',input);
+          return jump('right', input);
         case 38: // up
-          return shiftKeyPressed ? moveUp(input) : jump('up',input);
+          return shiftKeyPressed ? moveUp(input) : jump('up', input);
         case 40: // down
-          return shiftKeyPressed ? moveDown(input) : jump('down',input);
+          return shiftKeyPressed ? moveDown(input) : jump('down', input);
         case 68: // d (duplicate)
           return shiftKeyPressed ? duplicateUp(input) : duplicateDown(input);
         case 13: // enter (insert)
@@ -71,8 +76,8 @@
       var $targetInput = getJumpTargetInput(direction, $input);
 
       if (! $targetInput.length) {
-        $input.trigger('bump', [direction]);
-        $input.trigger('bump:' + direction);
+        $input.trigger('bump', [direction, currentEvent]);
+        $input.trigger('bump:' + direction, currentEvent);
         return;
       }
 
