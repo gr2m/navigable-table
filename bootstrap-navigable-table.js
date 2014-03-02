@@ -175,18 +175,36 @@
     //
     function getJumpTargetRowInput (direction, $input) {
       var $cell = $input.closest('td');
+      var $inputsInCell = $cell.find(focusableSelector);
+      var currentInputIndex = $inputsInCell.index($input);
       var $row = $cell.parent();
       var $targetRow = (direction === 'up') ? $row.prev() : $row.next();
+      var $targetCell = $targetRow.children('td,th').eq( $cell.index() );
 
-      return $targetRow.children('td,th').eq( $cell.index() ).find(focusableSelector);
+      return $targetCell.find(focusableSelector).eq(currentInputIndex);
     }
 
     //
     function getJumpTargetColumnInput (direction, $input) {
       var $cell = $input.closest('td');
-      var $targetCell = (direction === 'left') ? $cell.prev() : $cell.next();
+      var $inputsInCell = $cell.find(focusableSelector);
+      var currentInputIndex;
+      var $targetCell;
 
-      return $targetCell.find(focusableSelector);
+      // if there are more than one inputs in the current cell,
+      // jump to the one on the left/right, if any
+      if ( $inputsInCell.length > 1 ) {
+        currentInputIndex = $inputsInCell.index($input);
+        if (direction === 'left' && currentInputIndex > 0) {
+          return $inputsInCell.eq( currentInputIndex - 1);
+        }
+        if (direction === 'right' && currentInputIndex < $inputsInCell.length - 1) {
+          return $inputsInCell.eq( currentInputIndex + 1);
+        }
+      }
+
+      $targetCell = (direction === 'left') ? $cell.prev() : $cell.next();
+      return $targetCell.find(focusableSelector).eq(0);
     }
 
     //
