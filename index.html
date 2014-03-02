@@ -163,6 +163,10 @@
     } else {
       document.body.className = 'os-other';
     }
+
+    $(document.body).on('bump', function(event, direction) {
+      console.log('BUMP %s!', direction)
+    });
   </script>
 </body>
 </html>

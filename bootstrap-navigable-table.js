@@ -67,10 +67,16 @@
 
     //
     function jump(direction, input) {
-      var $input = getJumpTargetInput(direction, input);
-      if (! $input.length) return;
+      var $input = $(input);
+      var $targetInput = getJumpTargetInput(direction, $input);
 
-      $input.focus().select();
+      if (! $targetInput.length) {
+        $input.trigger('bump', [direction]);
+        $input.trigger('bump:' + direction);
+        return;
+      }
+
+      $targetInput.focus().select();
       return false;
     }
 
@@ -153,17 +159,17 @@
     //
     //
     //
-    function getJumpTargetInput (direction, input) {
+    function getJumpTargetInput (direction, $input) {
       if (direction === 'up' || direction === 'down') {
-        return getJumpTargetRowInput(direction, input);
+        return getJumpTargetRowInput(direction, $input);
       }
 
-      return getJumpTargetColumnInput(direction, input);
+      return getJumpTargetColumnInput(direction, $input);
     }
 
     //
-    function getJumpTargetRowInput (direction, input) {
-      var $cell = $(input).closest('td');
+    function getJumpTargetRowInput (direction, $input) {
+      var $cell = $input.closest('td');
       var $row = $cell.parent();
       var $targetRow = (direction === 'up') ? $row.prev() : $row.next();
 
@@ -171,8 +177,8 @@
     }
 
     //
-    function getJumpTargetColumnInput (direction, input) {
-      var $cell = $(input).closest('td');
+    function getJumpTargetColumnInput (direction, $input) {
+      var $cell = $input.closest('td');
       var $targetCell = (direction === 'left') ? $cell.prev() : $cell.next();
 
       return $targetCell.find(focusableSelector);
