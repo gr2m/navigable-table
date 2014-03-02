@@ -69,14 +69,22 @@
     //
     function jumpLeft (input) {
       var $cell = $(input).closest('td');
-      $cell.prev().find(focusableSelector).focus().select();
+      var $input = $cell.prev().find(focusableSelector);
+
+      if (! $input.length) return;
+
+      $input.focus().select();
       return false;
     }
 
     //
     function jumpRight (input) {
       var $cell = $(input).closest('td');
-      $cell.next().find(focusableSelector).focus().select();
+      var $input = $cell.next().find(focusableSelector);
+
+      if (! $input.length) return;
+
+      $input.focus().select();
       return false;
     }
 
@@ -85,7 +93,11 @@
       var $cell = $(input).closest('td');
       var $row = $cell.parent();
       var index = $cell.index();
-      $row.prev().children('td,th').eq(index).find(focusableSelector).focus().select();
+      var $input = $row.prev().children('td,th').eq(index).find(focusableSelector);
+
+      if (! $input.length) return;
+
+      $input.focus().select();
       return false;
     }
 
@@ -94,7 +106,11 @@
       var $cell = $(input).closest('td');
       var $row = $cell.parent();
       var index = $cell.index();
-      $row.next().children('td,th').eq(index).find(focusableSelector).focus().select();
+      var $input = $row.next().children('td,th').eq(index).find(focusableSelector);
+
+      if (! $input.length) return;
+
+      $input.focus().select();
       return false;
     }
 
