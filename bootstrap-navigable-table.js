@@ -244,12 +244,12 @@
   // EDITABLE TABLE DATA-API
   // =======================
 
-  $(document).on('keydown.bs.navigableTable.data-api click.bs.navigableTable.data-api focus.bs.navigableTable.data-api', 'table[data-navigable-spy]', function(event) {
+  $(document).on('keydown.bs.navigableTable.data-api focus.bs.navigableTable.data-api', 'table[data-navigable-spy]', function(event) {
     var $table = $(event.currentTarget);
     event.preventDefault();
     event.stopImmediatePropagation();
     $table.removeAttr('data-navigable-spy');
     $table.navigableTable();
-    $table.trigger(event);
+    $(event.target).trigger($.Event(event));
   });
 })(jQuery);
