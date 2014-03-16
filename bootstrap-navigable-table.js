@@ -8,7 +8,7 @@
   var NavigableTable = function (el) {
     var $table, $body;
     var keyboardShortcutsMetakey;
-    var focusableSelector = '[name],a';
+    var focusableSelector = '[name]:visible,a,[contenteditable]';
     var currentEvent;
 
     //
@@ -246,8 +246,10 @@
 
   $(document).on('keydown.bs.navigableTable.data-api focus.bs.navigableTable.data-api', 'table[data-navigable-spy]', function(event) {
     var $table = $(event.currentTarget);
+
     event.preventDefault();
     event.stopImmediatePropagation();
+
     $table.removeAttr('data-navigable-spy');
     $table.navigableTable();
     $(event.target).trigger($.Event(event));
