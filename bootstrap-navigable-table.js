@@ -94,8 +94,8 @@
       if ($prev.length === 0) return false;
 
       index = $row.index();
-      $row.trigger('move', 'up', index);
-      $row.trigger('move:up', index);
+      $row.trigger('move', ['up', index]);
+      $row.trigger('move:up', [index]);
 
       $prev.insertAfter($row);
       return false;
