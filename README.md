@@ -53,3 +53,27 @@ Usage
   </tbody>
 </table>
 ```
+
+Events
+------
+
+```
+// bump event when there is no column / row to jump / move to
+$table.on('bump', function(event, direction, keyDownEvent) {});
+$table.on('bump:up', function(event, keyDownEvent) {});
+$table.on('bump:down', function(event, keyDownEvent) {});
+
+// move events, when a row is moved up or down
+$table.on('move', function(event, direction, index) {});
+$table.on('move:up', function(event, index) {});
+$table.on('move:down', function(event, index) {});
+```
+
+
+
+
+
+
+
+
+

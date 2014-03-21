@@ -9,7 +9,7 @@
     var $table, $body;
     var keyboardShortcutsMetakey;
     var focusableSelector = '[name]:visible,a,[contenteditable]';
-    var currentEvent;
+    var currentKeyDownEvent;
 
     //
     //
@@ -42,7 +42,7 @@
 
       // store current event to pass it to bump events.
       // That way the bump handlers can cancel it if needed.
-      currentEvent = event;
+      currentKeyDownEvent = event;
 
       return navigate(input, keyCode, shiftKeyPressed);
     }
@@ -76,8 +76,8 @@
       var $targetInput = getJumpTargetInput(direction, $input);
 
       if (! $targetInput.length) {
-        $input.trigger('bump', [direction, currentEvent]);
-        $input.trigger('bump:' + direction, currentEvent);
+        $input.trigger('bump', [direction, currentKeyDownEvent]);
+        $input.trigger('bump:' + direction, currentKeyDownEvent);
         return;
       }
 
@@ -89,8 +89,13 @@
     function moveUp (input) {
       var $row = $(input).closest('tr');
       var $prev = $row.prev();
+      var index;
 
       if ($prev.length === 0) return false;
+
+      index = $row.index();
+      $row.trigger('move', 'up', index);
+      $row.trigger('move:up', index);
 
       $prev.insertAfter($row);
       return false;
@@ -100,8 +105,13 @@
     function moveDown (input) {
       var $row = $(input).closest('tr');
       var $next = $row.next();
+      var index;
 
       if ($next.length === 0) return false;
+
+      index = $row.index();
+      $row.trigger('move', 'down', index);
+      $row.trigger('move:down', index);
 
       $next.insertBefore($row);
       return false;
