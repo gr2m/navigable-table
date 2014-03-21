@@ -110,8 +110,8 @@
       if ($next.length === 0) return false;
 
       index = $row.index();
-      $row.trigger('move', 'down', index);
-      $row.trigger('move:down', index);
+      $row.trigger('move', ['down', index]);
+      $row.trigger('move:down', [index]);
 
       $next.insertBefore($row);
       return false;
