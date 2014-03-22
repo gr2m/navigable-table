@@ -94,8 +94,11 @@
       if ($prev.length === 0) return false;
 
       index = $row.index();
-      $row.trigger('move', ['up', index]);
-      $row.trigger('move:up', [index]);
+      $row.trigger('move', ['up', index, currentKeyDownEvent]);
+      $row.trigger('move:up', [index, currentKeyDownEvent]);
+
+      // allow to cancel move
+      if (currentKeyDownEvent.isDefaultPrevented()) return;
 
       $prev.insertAfter($row);
       return false;
@@ -110,8 +113,11 @@
       if ($next.length === 0) return false;
 
       index = $row.index();
-      $row.trigger('move', ['down', index]);
-      $row.trigger('move:down', [index]);
+      $row.trigger('move', ['down', index, currentKeyDownEvent]);
+      $row.trigger('move:down', [index, currentKeyDownEvent]);
+
+      // allow to cancel move
+      if (currentKeyDownEvent.isDefaultPrevented()) return;
 
       $next.insertBefore($row);
       return false;
