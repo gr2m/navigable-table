@@ -129,6 +129,8 @@
       var $newRow = $row.clone();
       passSelecectValues($row, $newRow);
       $row.before($newRow);
+      $row.trigger('duplicate', ['up', $newRow]);
+      $row.trigger('duplicate:up', [$newRow]);
       jump('up', input);
       return false;
     }
@@ -139,6 +141,8 @@
       var $newRow = $row.clone();
       passSelecectValues($row, $newRow);
       $row.after($newRow);
+      $row.trigger('duplicate', ['down', $newRow]);
+      $row.trigger('duplicate:down', [$newRow]);
       jump('down', input);
       return false;
     }
@@ -149,6 +153,8 @@
       var $newRow = $row.clone();
       $newRow.find(focusableSelector).val('');
       $row.before($newRow);
+      $row.trigger('insert', ['up', $newRow]);
+      $row.trigger('insert:up', [$newRow]);
       jump('up', input);
       return false;
     }
@@ -159,6 +165,8 @@
       var $newRow = $row.clone();
       $newRow.find(focusableSelector).val('');
       $row.after($newRow);
+      $row.trigger('insert', ['down', $newRow]);
+      $row.trigger('insert:down', [$newRow]);
       jump('down', input);
       return false;
     }
