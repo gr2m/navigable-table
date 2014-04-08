@@ -54,9 +54,9 @@
     function navigate (input, keyCode, shiftKeyPressed) {
       switch (keyCode) {
         case 37: // left
-          return jump('left', input);
+          return shiftKeyPressed ? true : jump('left', input);
         case 39: // right
-          return jump('right', input);
+          return shiftKeyPressed ? true : jump('right', input);
         case 38: // up
           return shiftKeyPressed ? moveUp(input) : jump('up', input);
         case 40: // down
