@@ -44,6 +44,8 @@
       // That way the bump handlers can cancel it if needed.
       currentKeyDownEvent = event;
 
+      console.log('%s: %s', input.tagName, input.value);
+
       return navigate(input, keyCode, shiftKeyPressed);
     }
 
@@ -74,6 +76,15 @@
     function jump(direction, input) {
       var $input = $(input);
       var $targetInput = getJumpTargetInput(direction, $input);
+
+      // workaround for https://github.com/gr2m/snug-minutes/issues/67
+      // https://github.com/gr2m/snug-minutes/issues/67
+      var value = $input.val();
+      if ($input.is('select')) {
+        setTimeout(function() {
+          $input.val(value);
+        });
+      }
 
       if (! $targetInput.length) {
         $input.trigger('bump', [direction, currentKeyDownEvent]);
