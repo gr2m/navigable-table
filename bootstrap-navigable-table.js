@@ -44,8 +44,6 @@
       // That way the bump handlers can cancel it if needed.
       currentKeyDownEvent = event;
 
-      console.log('%s: %s', input.tagName, input.value);
-
       return navigate(input, keyCode, shiftKeyPressed);
     }
 
