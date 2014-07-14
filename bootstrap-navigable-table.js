@@ -75,8 +75,8 @@
       var $input = $(input);
       var $targetInput = getJumpTargetInput(direction, $input);
 
-      // workaround for https://github.com/gr2m/snug-minutes/issues/67
-      // https://github.com/gr2m/snug-minutes/issues/67
+      // workaround for https://github.com/gr2m/minutes.io/issues/67
+      // https://github.com/gr2m/minutes.io/issues/67
       var value = $input.val();
       if ($input.is('select')) {
         setTimeout(function() {
