@@ -9,6 +9,7 @@
     var $table, $body;
     var keyboardShortcutsMetakey;
     var focusableSelector = '[name]:visible,a,[contenteditable]';
+    var inputSelector = '[name]:visible,[contenteditable]';
     var currentKeyDownEvent;
 
     //
@@ -160,7 +161,7 @@
     function insertUp (input) {
       var $row = $(input).closest('tr');
       var $newRow = $row.clone();
-      $newRow.find(focusableSelector).val('');
+      $newRow.find(inputSelector).val('');
       $row.before($newRow);
       $row.trigger('insert', ['up', $newRow]);
       $row.trigger('insert:up', [$newRow]);
@@ -172,7 +173,7 @@
     function insertDown (input) {
       var $row = $(input).closest('tr');
       var $newRow = $row.clone();
-      $newRow.find(focusableSelector).val('');
+      $newRow.find(inputSelector).val('');
       $row.after($newRow);
       $row.trigger('insert', ['down', $newRow]);
       $row.trigger('insert:down', [$newRow]);
