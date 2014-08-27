@@ -59,14 +59,20 @@ Events
 
 ```
 // bump event when there is no column / row to jump / move to
-$table.on('bump', function(event, direction, keyDownEvent) {});
-$table.on('bump:up', function(event, keyDownEvent) {});
-$table.on('bump:down', function(event, keyDownEvent) {});
+$table.on('bump', function(event, direction) {});
+$table.on('bump:up', function(event) {});
+$table.on('bump:down', function(event) {});
 
 // move events, when a row is moved up or down
 $table.on('move', function(event, direction, index) {});
 $table.on('move:up', function(event, index) {});
 $table.on('move:down', function(event, index) {});
+
+// move events, before a row is moved up or down.
+// The 'move' events can be preventend by calling cancelMove()
+$table.on('before:move', function(event, direction, index, cancelMove) {});
+$table.on('before:move:up', function(event, index, cancelMove) {});
+$table.on('before:move:down', function(event, index, cancelMove) {});
 ```
 
 

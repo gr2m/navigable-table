@@ -10,7 +10,6 @@
     var keyboardShortcutsMetakey;
     var focusableSelector = '[name]:visible,a,[contenteditable]';
     var inputSelector = '[name]:visible,[contenteditable]';
-    var currentKeyDownEvent;
 
     //
     //
@@ -40,10 +39,6 @@
       var keyCode = event.keyCode;
 
       if (!event[keyboardShortcutsMetakey]) return;
-
-      // store current event to pass it to bump events.
-      // That way the bump handlers can cancel it if needed.
-      currentKeyDownEvent = event;
 
       return navigate(input, keyCode, shiftKeyPressed);
     }
@@ -76,7 +71,7 @@
       var $input = $(input);
       var $targetInput = getJumpTargetInput(direction, $input);
 
-      // workaround for https://github.com/gr2m/minutes.io/issues/67
+      // workaround for:
       // https://github.com/gr2m/minutes.io/issues/67
       var value = $input.val();
       if ($input.is('select')) {
@@ -86,8 +81,8 @@
       }
 
       if (! $targetInput.length) {
-        $input.trigger('bump', [direction, currentKeyDownEvent]);
-        $input.trigger('bump:' + direction, currentKeyDownEvent);
+        $input.trigger('bump', [direction]);
+        $input.trigger('bump:' + direction);
         return;
       }
 
@@ -96,40 +91,57 @@
     }
 
     //
+    // moves current row up, by moving the above row down.
+    //
     function moveUp (input) {
       var $row = $(input).closest('tr');
       var $prev = $row.prev();
       var index;
+      var moveRows = true;
 
       if ($prev.length === 0) return false;
 
+      function cancelMove() {
+        moveRows = false;
+      }
       index = $row.index();
-      $row.trigger('move', ['up', index, currentKeyDownEvent]);
-      $row.trigger('move:up', [index, currentKeyDownEvent]);
+      $row.trigger('before:move', ['up', index, cancelMove]);
+      $row.trigger('before:move:up', [index, cancelMove]);
 
-      // allow to cancel move
-      if (currentKeyDownEvent.isDefaultPrevented()) return;
+      if (!moveRows) return;
 
       $prev.insertAfter($row);
+      index -= 1;
+      $row.trigger('move', ['up', index]);
+      $row.trigger('move:up', [index]);
+
       return false;
     }
 
+    //
+    // moves current row down, by moving the below row up.
     //
     function moveDown (input) {
       var $row = $(input).closest('tr');
       var $next = $row.next();
       var index;
+      var moveRows = true;
 
       if ($next.length === 0) return false;
 
+      function cancelMove() {
+        moveRows = false;
+      }
       index = $row.index();
-      $row.trigger('move', ['down', index, currentKeyDownEvent]);
-      $row.trigger('move:down', [index, currentKeyDownEvent]);
+      $row.trigger('before:move', ['down', index, cancelMove]);
+      $row.trigger('before:move:down', [index, cancelMove]);
 
-      // allow to cancel move
-      if (currentKeyDownEvent.isDefaultPrevented()) return;
-
+      if (!moveRows) return;
       $next.insertBefore($row);
+      index += 1;
+      $row.trigger('move', ['down', index]);
+      $row.trigger('move:down', [index]);
+
       return false;
     }
 
