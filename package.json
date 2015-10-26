@@ -1,0 +1,21 @@
+{
+  "name": "navigable-table",
+  "description": "bootstrap plugin for elegant navigating along table inputs",
+  "main": "bootstrap-navigable-table.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gr2m/navigable-table.git"
+  },
+  "author": "Gregor Martynus <gregor@martynus.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gr2m/navigable-table/issues"
+  },
+  "homepage": "https://github.com/gr2m/navigable-table#readme"
+}
