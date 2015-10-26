@@ -6,7 +6,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "exit 1"
+    "test": "exit 1",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
@@ -17,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/gr2m/navigable-table/issues"
   },
-  "homepage": "https://github.com/gr2m/navigable-table#readme"
+  "homepage": "https://github.com/gr2m/navigable-table#readme",
+  "devDependencies": {
+    "semantic-release": "^6.0.3"
+  }
 }
