@@ -1,26 +1,38 @@
-Navigable Table – A bootstrap plugin
-====================================
+# Navigable Table – A jQuery plugin
 
-> A Bootstrap plugin for elegant navigating along table inputs
+> A jQuery plugin for elegant editing of data collections.
 
+[![Build Status](https://travis-ci.org/gr2m/navigable-table.svg)](https://travis-ci.org/gr2m/navigable-table)
+[![Dependency Status](https://david-dm.org/gr2m/navigable-table.svg)](https://david-dm.org/gr2m/navigable-table)
+[![devDependency Status](https://david-dm.org/gr2m/navigable-table/dev-status.svg)](https://david-dm.org/gr2m/navigable-table#info=devDependencies)
 
-Installation
-------------
+## Download / Installation
 
-Simplest way to install is using [bower](http://bower.io/):
+You can download the latest JS & CSS code here:
+
+- https://npmcdn.com/navigable-table/dist/navigable-table.js
+
+Or install via [npm](https://www.npmjs.com/)
 
 ```
-bower install --save bootstrap-navigable-table
+npm install --save navigable-table
 ```
 
+The JS code can be required with
 
-Usage
------
+```js
+var jQuery = require('jquery')
+var navigableTable = require('navigable-table')
+
+// init
+navigableTable(jQuery)
+```
+
+## Usage
 
 ```html
-<!-- load bootstrap assets -->
-<link rel="stylesheet" type="text/css" href="bootstrap.css">
-<script src="bootstrap.js"></script>
+<!-- load jquery -->
+<script src="jquery.js"></script>
 
 <!-- load navigable-table assets -->
 <script src="navigable-table.js"></script>
@@ -54,8 +66,7 @@ Usage
 </table>
 ```
 
-Events
-------
+## Events
 
 ```
 // bump event when there is no column / row to jump / move to
@@ -75,11 +86,38 @@ $table.on('before:move:up', function(event, index, cancelMove) {});
 $table.on('before:move:down', function(event, index, cancelMove) {});
 ```
 
+## Local Setup
 
+```bash
+git clone git@github.com:gr2m/navigable-table.git
+cd navigable-table
+npm install
+```
 
+## Test
 
+You can start a local dev server with
 
+```bash
+npm start
+```
 
+Run tests with
 
+```bash
+npm test
+```
 
+While working on the tests, you can start Selenium / Chrome driver
+once, and then tests re-run on each save
 
+```bash
+npm run test:mocha:watch
+```
+
+## Fine Print
+
+The Expandable Input Plugin have been authored by [Gregor Martynus](https://github.com/gr2m),
+proud member of the [Hoodie Community](http://hood.ie/).
+
+License: MIT
