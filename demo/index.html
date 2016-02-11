@@ -2,15 +2,14 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Navigable Table – A bootstrap plugin</title>
+  <title>Navigable Table – A jQuery plugin</title>
 
-  <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
-  <link rel="stylesheet" type="text/css" href="bower_components/bootstrap-editable-table/bootstrap-editable-table.css">
+  <link rel="stylesheet" href="bundle.css" charset="utf-8">
 </head>
 
 <body>
   <header>
-    <h1>Bootstrap Navigable Table</h1>
+    <h1>Navigable Table</h1>
     <h6>Made by the <a href="http://hood.ie">Hoodie Community</a>.</h6>
   </header>
 
@@ -96,71 +95,12 @@
   </dl>
 
   <p class="info">
-    <strong>Note:</strong> This demo is using the <a href="https://github.com/gr2m/bootstrap-editable-table">Bootstrap Editable Table</a>
+    <strong>Note:</strong> This demo is using the <a href="https://github.com/gr2m/editable-table">Editable Table</a>
     plugin for auto-adding of new rows, and for styling.<br>
     Support keybord shortcuts:
   </p>
 
-
-  <style>
-  body {
-    font-family: Helvetica, Arial;
-  }
-  header {
-    padding: 18px 18px 24px;
-    background: #222;
-    color: #fff;
-
-    /* hoodie hoodie hoodie! */
-    background-image: linear-gradient(90deg, #2C2A86 20.5%, #078D2D 20.5%, #078D2D 37.5%, #FCB20D 37.5%, #FCB20D 55.5%, #EC5100 55.5%, #EC5100 72.5%, #6A3C06 72.5%, #6A3C06 79.5%, #C01C1B 79.5%);
-    background-size: 300px 6px;
-    background-repeat: repeat-x;
-    background-position: 0 100%;
-  }
-  header a {
-    color: #fff !important;
-  }
-  header h1 {
-    margin: 0;
-    font-size: 28px;
-    font-weight: bold;
-  }
-  header h6 {
-    margin: 0;
-  }
-  h3 {
-    padding: 32px 8px 4px;
-    font-size: 14px;
-    font-weight: bold;
-    color: #444;
-  }
-  .shortcuts {
-    font-size: 12px;
-  }
-  .shortcuts dt {
-    width: 80px;
-  }
-  .shortcuts dd {
-    margin-left: 88px;
-  }
-  p.info {
-    padding: 0 8px;
-    font-size: 10px;
-    color: #888;
-  }
-  p.info a {
-    color: inherit;
-    text-decoration: underline;
-  }
-  .os-mac .os-other,
-  .os-other .os-mac {
-    display: none;
-  }
-  </style>
-  <script src="bower_components/jquery/jquery.min.js"></script>
-  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script src="bower_components/bootstrap-editable-table/bootstrap-editable-table.js"></script>
-  <script src="bootstrap-navigable-table.js"></script>
+  <script src="bundle.js"></script>
   <script>
     if (window.navigator.appVersion.indexOf('Mac') !== -1) {
       document.body.className = 'os-mac';
