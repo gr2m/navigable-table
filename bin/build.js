@@ -19,16 +19,12 @@ var compiler = webpack({
     loaders: [
       {
         test: /\.css$/,
-        // loader: 'style-loader!css-loader'
         loader: ExtractTextPlugin.extract('style-loader', 'css-loader')
       }
     ]
   },
   modulesDirectories: [
     'node_modules'
-  ],
-  plugins: [
-    new ExtractTextPlugin('navigable-table.css')
   ]
 })
 
