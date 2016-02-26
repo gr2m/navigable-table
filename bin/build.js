@@ -8,12 +8,12 @@ var webpack = require('webpack')
 // returns a Compiler instance
 var compiler = webpack({
   entry: [
-    './editable-table.js',
-    './editable-table.css'
+    './navigable-table.js',
+    './navigable-table.css'
   ],
   output: {
     path: resolvePath(__dirname, '../dist'),
-    filename: 'editable-table.js'
+    filename: 'navigable-table.js'
   },
   module: {
     loaders: [
@@ -28,7 +28,7 @@ var compiler = webpack({
     'node_modules'
   ],
   plugins: [
-    new ExtractTextPlugin('editable-table.css')
+    new ExtractTextPlugin('navigable-table.css')
   ]
 })
 
