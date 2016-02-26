@@ -298,3 +298,8 @@ function navigableTable ($) {
     $(event.target).trigger($.Event(event))
   })
 }
+
+// if run in a browser, init immediately
+if (typeof window !== 'undefined' && window.jQuery) {
+  navigableTable(window.jQuery)
+}
