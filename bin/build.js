@@ -8,8 +8,7 @@ var webpack = require('webpack')
 // returns a Compiler instance
 var compiler = webpack({
   entry: [
-    './navigable-table.js',
-    './navigable-table.css'
+    './navigable-table.js'
   ],
   output: {
     path: resolvePath(__dirname, '../dist'),
