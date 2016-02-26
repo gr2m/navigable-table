@@ -3,8 +3,8 @@
   "description": "A jQuery plugin to use <{span|div|...} contenteditable> as expandable inputs.",
   "main": "navigable-table.js",
   "files": [
-    "navigable-table.js",
-    "dist"
+    "demo/",
+    "dist/"
   ],
   "directories": {
     "test": "test"
@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gr2m/editable-table.git"
+    "url": "https://github.com/gr2m/navigable-table.git"
   },
   "keywords": [
     "bootstrap",
@@ -34,9 +34,9 @@
   "author": "Gregor Martynus",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gr2m/editable-table/issues"
+    "url": "https://github.com/gr2m/navigable-table/issues"
   },
-  "homepage": "https://github.com/gr2m/editable-table",
+  "homepage": "https://github.com/gr2m/navigable-table",
   "devDependencies": {
     "@gr2m/frontend-test-setup": "^1.1.6",
     "bootstrap": "^3.3.6",
