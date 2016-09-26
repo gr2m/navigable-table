@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Navigable Table – A jQuery plugin</title>
+
+  <link rel="stylesheet" href="bundle.css" charset="utf-8">
+</head>
+
+<body>
+  <header>
+    <h1>Navigable Table</h1>
+    <h6>Made by the <a href="http://hood.ie">Hoodie Community</a>.</h6>
+  </header>
+
+  <table data-navigable-spy data-editable data-editable-spy class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Gender</th>
+        <th colspan="99">Birthday</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><input name="name" value="Raphael Saadiq" placeholder="Joe Doe"></td>
+        <td>
+          <select name="gender">
+            <option>female</option>
+            <option selected>male</option>
+          </select>
+        </td>
+        <td><input name="email" value="raphael@example.com" placeholder="joe@example.com" type="email"></td>
+        <td><input name="birthday" value="1966-05-14" placeholder="01/01/1980" type="date"></td>
+        <td>
+          <input type="checkbox" name="newsletter" value="1"> newsletter
+          <a href="#">?</a>
+        </td>
+      </tr>
+      <tr>
+        <td><input name="name" value="Dawn Robinson" placeholder="Joe Doe"></td>
+        <td>
+          <select name="gender">
+            <option selected>female</option>
+            <option>male</option>
+          </select>
+        </td>
+        <td><input name="email" value="dawn@example.com" placeholder="joe@example.com" type="email"></td>
+        <td><input name="birthday" value="1965-11-24" placeholder="01/01/1980" type="date"></td>
+        <td>
+          <input type="checkbox" name="newsletter" value="1"> newsletter
+          <a href="#">?</a>
+        </td>
+      </tr>
+      <tr>
+        <td><input name="name" value="Ali Shaheed Muhammad" placeholder="Joe Doe"></td>
+        <td>
+          <select name="gender">
+            <option>female</option>
+            <option selected>male</option>
+          </select>
+        </td>
+        <td><input name="email" value="ali@example.com" placeholder="joe@example.com" type="email"></td>
+        <td><input name="birthday" value="1970-08-11" placeholder="01/01/1980" type="date"></td>
+        <td>
+          <input type="checkbox" name="newsletter" value="1"> newsletter
+          <a href="#">?</a>
+        </td>
+      </tr>
+      <tr>
+        <td><input name="name" placeholder="Joe Doe"></td>
+        <td>
+          <select name="gender">
+            <option>female</option>
+            <option>male</option>
+          </select>
+        </td>
+        <td><input name="email" placeholder="joe@example.com" type="email"></td>
+        <td><input name="birthday" placeholder="01/01/1980" type="date"></td>
+        <td>
+          <input type="checkbox" name="newsletter" value="1"> newsletter
+          <a href="#">?</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Supported keyboard shortcuts</h3>
+  <dl class="shortcuts dl-horizontal">
+    <dt>jump</dt><dd><span class="os-mac">⌘</span><span class="os-other">alt</span> + arrow keys</dd>
+    <dt>move</dt><dd><span class="os-mac">⌘</span><span class="os-other">alt</span> + shift + up/down</dd>
+    <dt>insert</dt><dd><span class="os-mac">⌘</span><span class="os-other">alt</span> + enter (+ shift)</dd>
+    <dt>duplicate</dt><dd><span class="os-mac">⌘</span><span class="os-other">alt</span> + d (+ shift)</dd>
+    <dt>delete</dt><dd><span class="os-mac">⌘</span><span class="os-other">alt</span> + shift + backspace</dd>
+  </dl>
+
+  <p class="info">
+    <strong>Note:</strong> This demo is using the <a href="https://github.com/gr2m/editable-table">Editable Table</a>
+    plugin for auto-adding of new rows, and for styling.<br>
+    Support keybord shortcuts:
+  </p>
+
+  <script src="bundle.js"></script>
+  <script>
+    if (window.navigator.appVersion.indexOf('Mac') !== -1) {
+      document.body.className = 'os-mac';
+    } else {
+      document.body.className = 'os-other';
+    }
+
+    $(document.body).on('bump', function(event, direction) {
+      console.log('BUMP %s!', direction)
+    });
+  </script>
+</body>
+</html>
