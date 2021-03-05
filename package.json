@@ -22,10 +22,7 @@
     "presemantic-release": "npm run build",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gr2m/navigable-table.git"
-  },
+  "repository": "github:gr2m/navigable-table",
   "keywords": [
     "bootstrap",
     "input",
@@ -33,10 +30,6 @@
   ],
   "author": "Gregor Martynus",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/gr2m/navigable-table/issues"
-  },
-  "homepage": "https://github.com/gr2m/navigable-table",
   "devDependencies": {
     "@gr2m/frontend-test-setup": "^1.1.6",
     "bootstrap": "^3.3.6",
